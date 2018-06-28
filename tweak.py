@@ -1,19 +1,14 @@
 #!/usr/bin/env python3
 
-# lxml library to handle XML data from SVG file.
-from lxml import etree
+import libxml2
 
 # Parsing an XML file:
-#  https://lxml.de/parsing.html
-parser = etree.XMLParser(huge_tree=True)
-tree = etree.parse("./stargate_template.svg", parser)
-root = etree.getroot()
-print("Root tag: ", root.tag)
+#  http://xmlsoft.org/python.html
 
-def walk(node, op):
-    op(node)
-    for kid in node:
-        walk(kid)
+doc = libxml2.parseFile("stargate_template.svg")
+ctxt = doc.xpathNewContext()
+res = ctxt.xpathEval("//*")
 
-
+for tag in res:
+    print(tag)
 
