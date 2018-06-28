@@ -7,7 +7,7 @@ import libxml2
 
 doc = libxml2.parseFile("stargate_template.svg")
 ctxt = doc.xpathNewContext()
-res = ctxt.xpathEval("//*")
+res = ctxt.xpathEval("//{*}path")
 
 for tag in res:
     print(tag)
